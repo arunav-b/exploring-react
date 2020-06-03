@@ -1,20 +1,39 @@
 import React, { Component } from "react";
-import { getMovies, deleteMovie } from "../services/fakeMovieService";
+import { getMovies } from "../services/fakeMovieService";
 import Like from "../common/like";
+import Pagination from "../common/pagination";
+import { paginate } from "../util/Paginate";
 
 class Movies extends Component {
   state = {
     movies: getMovies(),
+    pageSize: 2,
+    currentPage: 1,
   };
 
   render() {
+    const { length: moviesCount } = this.state.movies;
     return (
       <React.Fragment>
         {<br></br>}
         {this.getCount()}
         {<br></br>}
-        {this.state.movies.length > 0 && this.getTable()}
+        {moviesCount > 0 && this.getTable()}
+        <br />
+        {this.getPagination()}
       </React.Fragment>
+    );
+  }
+
+  getPagination() {
+    const { movies, pageSize, currentPage } = this.state;
+    return (
+      <Pagination
+        itemsCount={movies.length}
+        pageSize={pageSize}
+        currentPage={currentPage}
+        onPageChange={this.handlePageChange}
+      />
     );
   }
 
@@ -25,6 +44,8 @@ class Movies extends Component {
   }
 
   getTable() {
+    const { movies: allMovies, currentPage, pageSize } = this.state;
+    const movies = paginate(allMovies, currentPage, pageSize);
     return (
       <table className="table">
         <thead>
@@ -38,7 +59,7 @@ class Movies extends Component {
           </tr>
         </thead>
         <tbody>
-          {this.state.movies.map((movie) => (
+          {movies.map((movie) => (
             <tr key={movie._id}>
               <td>{movie.title}</td>
               <td>{movie.genre.name}</td>
@@ -66,7 +87,7 @@ class Movies extends Component {
   }
 
   handleDelete = (movie) => {
-    const movies = this.state.movies.filter((m) => m._id != movie._id);
+    const movies = this.state.movies.filter((m) => m._id !== movie._id);
     this.setState({ movies });
   };
 
@@ -76,6 +97,10 @@ class Movies extends Component {
     movies[index] = { ...movie };
     movies[index].liked = !movies[index].liked;
     this.setState({ movies });
+  };
+
+  handlePageChange = (page) => {
+    this.setState({ currentPage: page });
   };
 }
 
