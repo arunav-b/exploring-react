@@ -15,19 +15,11 @@ class App extends Component {
 
   constructor() {
     super();
-    console.log("App :: constructor");
+    console.log("Mount :: constructor");
   }
 
   componentDidMount() {
-    console.log("App :: componentDidMount");
-  }
-
-  componentDidUpdate() {
-    console.log("App :: componentDidUpdate");
-  }
-
-  componentWillUnmount() {
-    console.log("App :: componentWillUnmount");
+    console.log("Mount :: componentDidMount");
   }
 
   handleReset = () => {
@@ -62,9 +54,9 @@ class App extends Component {
   };
 
   render() {
-    console.log("App :: render");
+    console.log("Mount :: render");
     return (
-      <div>
+      <React.Fragment>
         <Navbar
           totalCounters={this.state.counters.filter((c) => c.value > 0).length}
         ></Navbar>
@@ -77,7 +69,7 @@ class App extends Component {
             onDown={this.handleClickDown}
           ></Counters>
         </main>
-      </div>
+      </React.Fragment>
     );
   }
 }

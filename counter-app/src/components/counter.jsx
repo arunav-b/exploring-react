@@ -1,32 +1,19 @@
 import React, { Component } from "react";
 
 class Counter extends Component {
+  // Maintaining a state that can be rendered
+  // state = {
+  //   value: value,
+  // };
+
   // Applying Javascript styles
   styles = {
     fontSize: 25,
     fontWeight: "bold",
   };
 
-  constructor() {
-    super();
-    console.log("Counter :: constructor");
-  }
-
-  componentDidMount() {
-    console.log("Counter :: componentDidMount");
-  }
-
-  componentDidUpdate() {
-    console.log("Counter :: componentDidUpdate");
-  }
-
-  componentWillUnmount() {
-    console.log("Counter :: componentWillUnmount");
-  }
-
   // The method that will render the output
   render() {
-    console.log("Counter :: render");
     const { onUp, onDelete, onDown } = this.props;
     return (
       <div className="row">
