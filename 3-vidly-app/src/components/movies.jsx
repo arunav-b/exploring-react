@@ -1,88 +1,63 @@
 import React, { Component } from "react";
 import { getMovies } from "../services/fakeMovieService";
-import Like from "../common/like";
-import Pagination from "../common/pagination";
+import Pagination from "./common/pagination";
 import { paginate } from "../util/Paginate";
+import ListGroup from "./common/listgroup";
+import { getGenres } from "../services/fakeGenreService";
+import MoviesTable from "./moviesTable";
 
 class Movies extends Component {
   state = {
-    movies: getMovies(),
-    pageSize: 2,
+    movies: [],
+    genres: [],
+    pageSize: 4,
     currentPage: 1,
   };
 
+  componentDidMount() {
+    const genres = [{ name: "All" }, ...getGenres()];
+    this.setState({ movies: getMovies(), genres });
+  }
+
   render() {
-    const { length: moviesCount } = this.state.movies;
-    return (
-      <React.Fragment>
-        {<br></br>}
-        {this.getCount()}
-        {<br></br>}
-        {moviesCount > 0 && this.getTable()}
-        <br />
-        {this.getPagination()}
-      </React.Fragment>
-    );
-  }
+    const { movies, selectedGenre, currentPage, pageSize, genres } = this.state;
 
-  getPagination() {
-    const { movies, pageSize, currentPage } = this.state;
-    return (
-      <Pagination
-        itemsCount={movies.length}
-        pageSize={pageSize}
-        currentPage={currentPage}
-        onPageChange={this.handlePageChange}
-      />
-    );
-  }
+    //Filtering movies
+    const filteredMovies =
+      selectedGenre && selectedGenre._id
+        ? movies.filter((movie) => movie.genre._id === selectedGenre._id)
+        : movies;
 
-  getCount() {
-    if (this.state.movies.length === 0)
-      return <h5>No movies in the database</h5>;
-    return <h5>Showing {this.state.movies.length} movies in the database</h5>;
-  }
+    if (filteredMovies.length === 0)
+      return <p>There are no movies in the database</p>;
 
-  getTable() {
-    const { movies: allMovies, currentPage, pageSize } = this.state;
-    const movies = paginate(allMovies, currentPage, pageSize);
+    // Paginating rendered movies
+    const pagedMovies = paginate(filteredMovies, currentPage, pageSize);
+
     return (
-      <table className="table">
-        <thead>
-          <tr>
-            <th scope="col">Title</th>
-            <th scope="col">Genre</th>
-            <th scope="col">Stock</th>
-            <th scope="col">Rate</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
-          </tr>
-        </thead>
-        <tbody>
-          {movies.map((movie) => (
-            <tr key={movie._id}>
-              <td>{movie.title}</td>
-              <td>{movie.genre.name}</td>
-              <td>{movie.numberInStock}</td>
-              <td>{movie.dailyRentalRate}</td>
-              <td>
-                <Like
-                  liked={movie.liked}
-                  onLike={() => this.handleLike(movie)}
-                ></Like>
-              </td>
-              <td>
-                <button
-                  onClick={() => this.handleDelete(movie)}
-                  className="btn btn-danger"
-                >
-                  Delete
-                </button>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+      <div className="row">
+        <div className="col-3">
+          <ListGroup
+            items={genres}
+            onItemSelect={this.handleGenreSelect}
+            selectedItem={selectedGenre}
+          />
+        </div>
+        <div className="col">
+          <p>Showing {filteredMovies.length} movies in the database</p>;
+          <MoviesTable
+            movies={pagedMovies}
+            onLike={this.handleLike}
+            onDelete={this.handleDelete}
+          />
+          <Pagination
+            itemsCount={filteredMovies.length}
+            pageSize={pageSize}
+            currentPage={currentPage}
+            onPageChange={this.handlePageChange}
+          />
+        </div>
+      </div>
     );
   }
 
@@ -101,6 +76,10 @@ class Movies extends Component {
 
   handlePageChange = (page) => {
     this.setState({ currentPage: page });
+  };
+
+  handleGenreSelect = (genre) => {
+    this.setState({ selectedGenre: genre, currentPage: 1 });
   };
 }
 
