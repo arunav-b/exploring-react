@@ -21,25 +21,19 @@ class Movies extends Component {
     this.setState({ movies: getMovies(), genres });
   }
 
-  render() {
+  getMoviesToRender = () => {
     const {
       movies,
       selectedGenre,
       currentPage,
       pageSize,
-      genres,
       sortColumn,
     } = this.state;
 
-    // Calling different functions for filtering, sorting and paginating before rendering the components
-    // Filtering movies
     const filteredMovies =
       selectedGenre && selectedGenre._id
         ? movies.filter((movie) => movie.genre._id === selectedGenre._id)
         : movies;
-
-    if (filteredMovies.length === 0)
-      return <p>There are no movies in the database</p>;
 
     // Sorting the filtered movies
     const sortedMovies = _.orderBy(
@@ -50,6 +44,23 @@ class Movies extends Component {
 
     // Paginating the sorted movies
     const pagedMovies = paginate(sortedMovies, currentPage, pageSize);
+    return { movies: pagedMovies, count: filteredMovies.length };
+  };
+
+  render() {
+    const {
+      movies: allMovies,
+      selectedGenre,
+      currentPage,
+      pageSize,
+      genres,
+      sortColumn,
+    } = this.state;
+
+    if (allMovies.length === 0)
+      return <p>There are no movies in the database</p>;
+
+    const { movies: pagedMovies, count } = this.getMoviesToRender();
 
     return (
       <div className="row">
@@ -61,7 +72,7 @@ class Movies extends Component {
           />
         </div>
         <div className="col">
-          <p>Showing {filteredMovies.length} movies in the database</p>
+          <p>Showing {count} movies in the database</p>
           <MoviesTable
             movies={pagedMovies}
             onLike={this.handleLike}
@@ -70,7 +81,7 @@ class Movies extends Component {
             sortColumn={sortColumn}
           />
           <Pagination
-            itemsCount={filteredMovies.length}
+            itemsCount={count}
             pageSize={pageSize}
             currentPage={currentPage}
             onPageChange={this.handlePageChange}
