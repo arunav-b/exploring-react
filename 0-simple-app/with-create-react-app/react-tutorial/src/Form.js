@@ -2,12 +2,14 @@ import React, { Component } from "react";
 
 class Form extends Component {
   initialState = {
-    name: "",
+    name2: "",
     job: "",
   };
 
   handleChange = (event) => {
     const { name, value } = event.target;
+    console.log("event.target: ", event.target);
+    console.log("event.currentTarget: ", event.currentTarget);
     this.setState({
       [name]: value,
     });
@@ -20,16 +22,16 @@ class Form extends Component {
 
   state = this.initialState;
   render() {
-    const { name, job } = this.state;
+    const { name2, job } = this.state;
 
     return (
       <form>
-        <label htmlFor="name">Name</label>
+        <label htmlFor="name3">Name</label>
         <input
           type="text"
-          name="name"
-          id="name"
-          value={name}
+          name="name2"
+          id="name3"
+          value={name2}
           onChange={this.handleChange}
         />
         <label htmlFor="job">Job</label>

@@ -5,6 +5,7 @@ const Input = ({ name, label, value, type = "text", error, onChange }) => {
     <div className="form-group">
       <label htmlFor={name}>{label}</label>
       <input
+        onBlur={onChange}
         onChange={onChange}
         value={value}
         name={name}
