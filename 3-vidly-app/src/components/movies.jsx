@@ -5,7 +5,9 @@ import { paginate } from "../util/Paginate";
 import ListGroup from "./common/listgroup";
 import { getGenres } from "../services/fakeGenreService";
 import MoviesTable from "./moviesTable";
+import { Link } from "react-router-dom";
 import _ from "lodash";
+import MovieForm from "./movieForm";
 
 class Movies extends Component {
   state = {
@@ -72,6 +74,9 @@ class Movies extends Component {
           />
         </div>
         <div className="col">
+          <Link to="/movies/new" className="btn btn-primary mb-4">
+            New Movie
+          </Link>
           <p>Showing {count} movies in the database</p>
           <MoviesTable
             movies={pagedMovies}
@@ -94,6 +99,11 @@ class Movies extends Component {
   handleDelete = (movie) => {
     const movies = this.state.movies.filter((m) => m._id !== movie._id);
     this.setState({ movies });
+  };
+
+  handleClick = (movie) => {
+    console.log("New Movie");
+    return <Link to="/movies/new">MovieForm</Link>;
   };
 
   handleLike = (movie) => {
