@@ -1,53 +1,34 @@
-# Exploring ReactJS
-
-## Projects
-
-Learning &amp; exploring reactjs by building small projects. List of projects currently working on -
-
-1. **hello-world** : Basic React JS app rendering a HTML tag
-2. **counter-app** : A counter app exploring react components, state & props
-3. **vidly-app** : A basic video library application
-
-## Topics Covered:
-
-### Components:
-
+Components:
 - Introducing JSX
 - Rendering classes & lists
 - Handling events
 - Updating the state
 
-### Composing Components:
-
+Composing Components:
 - Passing data to components
 - Props vs State
 - Lifting the state up
 - Stateless functional components
 
-### Lifecycle Hooks:
-
+Lifecycle Hooks:
 - Mounting phase
 - Updating phase
 - Unmounting phase
 
-### Pagination:
-
+Pagination:
 - Displaying pages
 - Handling page changes
 - Paginating data
 
-### Filtering:
-
+Filtering:
 - Handling Selection
 - Implement filtering
 
-### Sorting:
-
+Sorting:
 - Raising the sort event
 - Implement sorting
 
-### Routing:
-
+Routing:
 - Introduction
 - Switch
 - Link
@@ -59,8 +40,7 @@ Learning &amp; exploring reactjs by building small projects. List of projects cu
 - Programmatic Navigation
 - Nested Routing
 
-### Forms:
-
+Forms:
 - Handling form submission
 - Refs
 - Controlled elements
@@ -68,17 +48,15 @@ Learning &amp; exploring reactjs by building small projects. List of projects cu
 - Validation using Joi
 - Implement Searching
 
-### Calling Backend services:
-
+Calling Backend services:
 - jsonplaceholder.com
-- http GET, POST rest calls using axios
+- http GET, POST
 - Optimistic vs Pessimistic updates
 - Error handling
 - Displaying errors
 - Logging errors
 
-### Authentication & Authorization:
-
+Authentication & Authorization:
 - Submitting a form
 - Handling errors
 - Storing JWT
@@ -88,22 +66,17 @@ Learning &amp; exploring reactjs by building small projects. List of projects cu
 - Protecting routes
 - Redirect after login
 
-### Deployment:
+Deployment:
 
-- In Heroku
-
-### Higher Order Components:
-
+Higher Order Components:
 - Implement HO components
 
-### Hooks:
-
+Hooks:
 - useState
 - useEffect
 - Custom Hooks
 
-### Context:
-
+Context:
 - In class components
 - In Functional components
 - Updating the context
