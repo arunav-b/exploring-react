@@ -7,10 +7,11 @@ Learning &amp; exploring reactjs by building small projects. List of projects cu
 1. **hello-world** : Basic React JS app rendering a HTML tag
 2. **counter-app** : A counter app exploring react components, state & props
 3. **vidly-app** : A basic video library application
+  
+  
+## React Learning Path 
 
-# React Learning Path 
-
-## Fundamentals:
+### Fundamentals:
 
 - Create React App
 - Functional Components
@@ -23,7 +24,7 @@ Learning &amp; exploring reactjs by building small projects. List of projects cu
 - Lists & Keys
 - Building Simple Forms
 
-## Advanced: 
+### Advanced: 
 
 - Context
 - Higher Order Components
@@ -33,7 +34,7 @@ Learning &amp; exploring reactjs by building small projects. List of projects cu
 - Portals
 - HTTP Requests 
 
-## Hooks:
+### Hooks:
 
 - useContext
 - useReducer
@@ -42,7 +43,8 @@ Learning &amp; exploring reactjs by building small projects. List of projects cu
 - useCallback
 - Custom Hooks
 
-
+  
+  
 ## Topics Covered:
 
 ### Components:
