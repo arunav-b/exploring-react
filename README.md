@@ -8,6 +8,41 @@ Learning &amp; exploring reactjs by building small projects. List of projects cu
 2. **counter-app** : A counter app exploring react components, state & props
 3. **vidly-app** : A basic video library application
 
+# React Learning Path 
+
+## Fundamentals:
+
+- Create React App
+- Functional Components
+- Class Components
+- JSX
+- Props & State
+- useState and useEffect Hooks
+- Component Lifecycle Methods
+- Conditional Rendering
+- Lists & Keys
+- Building Simple Forms
+
+## Advanced: 
+
+- Context
+- Higher Order Components
+- Render Props
+- Refs
+- Error Boundaries
+- Portals
+- HTTP Requests 
+
+## Hooks:
+
+- useContext
+- useReducer
+- useRef
+- useMemo
+- useCallback
+- Custom Hooks
+
+
 ## Topics Covered:
 
 ### Components:
