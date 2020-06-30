@@ -70,6 +70,7 @@
 - Different values can be passed to the same `Component` using Properties (`props`) to render different values or styles.
 - Using the `this.props.propertyName`, the React `Component` can accept `props` as a JSX expression enclosed in {}. React evaluates the expression inside {} as JavaScript and anything outside it as XML. Hence the name JSX (JavaScript + XML).
 - The `render()` method in React Component outputs the JSX. Let's take a look at how all of it works -
+
   ```
     ...
     <body>
@@ -94,6 +95,7 @@
 ### 2C. Passing `children` to a `Component`
 
 - A React Component can accept any data passed via children using `this.props.children`
+
   ```
     ...
     <body>
@@ -126,6 +128,7 @@
 
 - Basic styling in React apps can be done by defining styles under the `<style>` tag.
 - Styling can also be done by specifying the `style` property inside a JSX element. Properties can be specified in a JavaScript style variable and the same can be passed as a JSX expression in the `style` property. The JS style variable can also refer to `this.props`
+
   ```
     ...
     <head>
@@ -174,6 +177,7 @@
 
 - We can build Components in React that uses multiple other Components.
 - The general rule is that our components should do just one thing.
+
   ```
     ...
     <script type="text/babel">
