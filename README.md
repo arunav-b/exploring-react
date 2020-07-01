@@ -180,57 +180,98 @@
 
   ```
     ...
-    <script type="text/babel">
-        class Square extends React.Component {
-            render() {
-                var squareStyle = {
-                    ...
-                };
-                return (
-                    <div style={squareStyle}>
-                    <br />
-                    </div>
-                );
-            }
+    class Square extends React.Component {
+        render() {
+            var squareStyle = {
+                ...
+            };
+            return (
+                <div style={squareStyle}>
+                <br />
+                </div>
+            );
         }
-        class Label extends React.Component {
-            render() {
-                var labelStyle = {
-                    ...
-                };
-                return (
-                    <div>
-                    <p style={labelStyle}>{this.props.color}</p>
-                    </div>
-                );
-            }
+    }
+    class Label extends React.Component {
+        render() {
+            var labelStyle = {
+                ...
+            };
+            return (
+                <div>
+                <p style={labelStyle}>{this.props.color}</p>
+                </div>
+            );
         }
-        class Card extends React.Component {
-            render() {
-                var cardStyle = {
-                    ...
-                };
-                return (
-                    <div style={cardStyle}>
-                    <Square color={this.props.color} />
-                    <Label color={this.props.color} />
-                    </div>
-                );
-            }
+    }
+    class Card extends React.Component {
+        render() {
+            var cardStyle = {
+                ...
+            };
+            return (
+                <div style={cardStyle}>
+                <Square color={this.props.color} />
+                <Label color={this.props.color} />
+                </div>
+            );
         }
-        ReactDOM.render(
-            <div>
-                <Card color="#FF6663" />
-            </div>,
-            document.querySelector("#container")
-        );
-    </script>
+    }
+    ReactDOM.render(
+        <div>
+            <Card color="#FF6663" />
+        </div>,
+        document.querySelector("#container")
+    );
     ...
   ```
 
 <br/>
 
-## 5. Transferring Props
+## 5. Transferring Props using ES6 Spread (...) operator
+
+- Using the ES6 Spread Operator multiple properties can be passed between components
+
+  ```
+    ...
+    class Display extends React.Component {
+        render() {
+        return (
+            <div>
+                <p>{this.props.color}</p>
+                <p>{this.props.num}</p>
+                ...
+            </div>
+        );
+        }
+    }
+    class Label extends React.Component {
+        render() {
+            return <Display {...this.props} />;
+        }
+    }
+    class Shirt extends React.Component {
+        render() {
+            return (
+                <div>
+                    <Label {...this.props} />
+                </div>
+            );
+        }
+    }
+    ReactDOM.render(
+        <div>
+            <Shirt
+                availability="true"
+                color="steelblue"
+                num="3.14"
+                size="medium"
+            />
+        </div>,
+        document.querySelector("#container")
+    );
+    ...
+  ```
 
 <br/>
 <br/>
