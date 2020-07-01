@@ -3,8 +3,7 @@
 > This README is split as -
 >
 > 1. Learning React
-> 2. Topics covered by Mosh
-> 3. Building projects
+> 2. Building projects
 
 <br/>
 
@@ -274,108 +273,176 @@
   ```
 
 <br/>
+
+> ### **Some Key Things about JSX** -
+>
+> 1. Evaluating Expressions: JSX is treated like JavaScript and has to be wrapped in {}
+> 2. Returning Multiple Elements: Use React.Fragment
+> 3. No Inline CSS is allowed
+> 4. Can't use reserved JavaScript keywords
+> 5. Comments should be defined in {} in JSX expressions -> /_ Comments will be written here _/
+> 6. HTML elements should be lower-case and React components should be upper-case
+> 7. Your JSX Can Be Anywhere
+
 <br/>
 
-# Topics Covered from Mosh's course:
+## 6. React Lifecycle Methods
 
-### Components:
+- Lifecycle methods are special methods that automatically get called as our component achieves certain milestones.
+- A React Component has 3 phases -
+  1. Mounting : The phase where a component attaches itself to the browser DOM.
+  2. Updating : The phase where the component updates because of new props or state changes.
+  3. Unmounting : This phase kicks in when a component is about to be destroyed.
+- In each of these phases a lifecycle method is triggered. The below diagram shows some of the important lifecycle methods that are triggered as a part of the lifecycle of a React component.
 
-- Introducing JSX
-- Rendering classes & lists
-- Handling events
-- Updating the state
+<img src="./images/lifecycle.png" width="60%">.
 
-### Composing Components:
+## 7. Dealing with State:
 
-- Passing data to components
-- Props vs State
-- Lifting the state up
-- Stateless functional components
+- React components has a built-in `state` object. The state object is where property values of the component is stored.
+- When the state object changes, the component re-renders.
+- In the below example, the `setState()` method is invoked whenever the `setInterval()` method is called after a fixed interval of time. The `setState()` method modifies the state object which causes React to re-render the Component.
 
-### Lifecycle Hooks:
+  ```
+  class AutoCounter extends React.Component {
+      state = {
+          count: 0,
+      };
+      componentDidMount() {
+          setInterval(this.timerTick, 1000);
+      }
+      timerTick = () => {
+          this.setState((prevState) => {
+          return { count: prevState.count + 100 };
+          });
+      };
+      render() {
+          return <h1>{this.state.count}</h1>;
+      }
+  }
+  class CounterDisplay extends React.Component {
+      render() {
+          return (
+              <div>
+                  <AutoCounter />
+              </div>
+          );
+      }
+  }
+  ReactDOM.render(
+      <CounterDisplay />,
+      document.querySelector("#container")
+  );
+  ```
 
-- Mounting phase
-- Updating phase
-- Unmounting phase
+- Please note here, the `timerTick()` is an arrow function because it uses the `this` context from the `this` of `componentDidMount()`, as arrow functions use lexical scoping. Alternatively, the timerTick() function can be bound to the Component using the `bind()` method before calling the `setInterval()` method or preferrably inside the `constructor`.
 
-### Pagination:
+  ```
+    componentDidMount() {
+        this.timerTick = this.timerTick.bind(this);
+        setInterval(this.timerTick, 1000);
+    }
+  ```
 
-- Displaying pages
-- Handling page changes
-- Paginating data
+  Or,
 
-### Filtering:
+  ```
+    constructor() {
+        super();
+        this.state = {
+            count: 0
+        };
+        this.timerTick = this.timerTick.bind(this);
+    }
 
-- Handling Selection
-- Implement filtering
+  ```
 
-### Sorting:
+<br/>
 
-- Raising the sort event
-- Implement sorting
+> ### **Props vs State** -
+>
+> `props` and `state` are both **plain JavaScript objects**. While both hold information that influences the output of render, they are different in one important way: `props` get passed to the component (similar to function parameters) whereas `state` is managed within the component (similar to variables declared within a function).
+>
+> [Additional Reference](https://github.com/uberVU/react-guide/blob/master/props-vs-state.md)
 
-### Routing:
+<br/>
 
-- Introduction
-- Switch
-- Link
+## 8. Rendering Lists:
+
+<br/>
+
+## 9. Conditional Rendering:
+
+<br/>
+
+## 10. Accessing DOM elements in React:
+
+<br/>
+
+## 11. Events in React:
+
+<br/>
+
+## 12. Forms:
+
+<br/>
+
+## 13. Lifting the State up:
+
+<br/>
+
+## 14. Stateless Functional Components:
+
+<br/>
+
+## 15. Try Implementing -
+
+- Pagination
+- Searching
+- Sorting
+- Filtering
+- Forms using Formik/Joi
+
+<br/>
+
+## 16. React Router
+
+- Switch & Link
 - Route Props
-- Route Params
-- Optional Params
-- Query Params
+- Route Params - Optional & Query
 - Redirects
 - Programmatic Navigation
 - Nested Routing
 
-### Forms:
+<br/>
 
-- Handling form submission
+## 17. Calling Backend Services
+
+- Using `axios`
+
+<br/>
+
+## 18. Some Advanced Concepts
+
+- Context
+- Higher Order Components
+- Render Props
 - Refs
-- Controlled elements
-- Handling multiple inputs
-- Validation using Joi
-- Implement Searching
+- Error Boundaries
+- Portals
 
-### Calling Backend services:
+<br/>
 
-- jsonplaceholder.com
-- http GET, POST rest calls using axios
-- Optimistic vs Pessimistic updates
-- Error handling
-- Displaying errors
-- Logging errors
-
-### Authentication & Authorization:
-
-- Submitting a form
-- Handling errors
-- Storing JWT
-- Displaying current user in Navbar
-- Calling protected API endpoints
-- Authorization
-- Protecting routes
-- Redirect after login
-
-### Deployment:
-
-- In Heroku
-
-### Higher Order Components:
-
-- Implement HO components
-
-### Hooks:
+## 19. React Hooks
 
 - useState
 - useEffect
+- useContext
+- useReducer
+- useRef
+- useMemo
+- useCallback
 - Custom Hooks
-
-### Context:
-
-- In class components
-- In Functional components
-- Updating the context
-- Consuming multiple contexts
 
 <br/>
 <br/>
@@ -388,3 +455,12 @@
 > 2. **counter-app** : A counter app exploring react components, state & props
 > 3. **vidly-app** : A basic video library application
 > 4. **to-do-app** : A basic To-Do application
+
+<br/>
+<br/>
+
+# References
+
+- [React JS Documentation](https://reactjs.org/docs/getting-started.html)
+- [React for Beginners](https://www.kirupa.com/react/index.htm)
+- [Mastering React with Mosh](https://codewithmosh.com/p/mastering-react)
