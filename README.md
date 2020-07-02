@@ -299,8 +299,8 @@
   - `componentWillUnmount()`
 - The below diagram shows when these lifecycle methods are triggered in a React component lifecycle.
 
-<img src="./images/lifecycle.png" width="100%">.
-
+<img src="./images/lifecycle.png" width="100%">
+  
 <br/>
 
 ## 7. Dealing with State:
