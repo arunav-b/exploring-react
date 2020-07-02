@@ -297,6 +297,8 @@
 
 <img src="./images/lifecycle.png" width="60%">.
 
+<br/>
+
 ## 7. Dealing with State:
 
 - React components has a built-in `state` object. The state object is where property values of the component is stored.
