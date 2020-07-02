@@ -290,10 +290,14 @@
 
 - Lifecycle methods are special methods that automatically get called as our component achieves certain milestones.
 - A React Component has 3 phases -
-  1. Mounting : The phase where a component attaches itself to the browser DOM.
-  2. Updating : The phase where the component updates because of new props or state changes.
-  3. Unmounting : This phase kicks in when a component is about to be destroyed.
-- In each of these phases a lifecycle method is triggered. The below diagram shows some of the important lifecycle methods that are triggered as a part of the lifecycle of a React component.
+  1. **Mounting** : The phase where a component attaches itself to the browser DOM.
+  2. **Updating** : The phase where the component updates because of new props or state changes.
+  3. **Unmounting** : This phase kicks in when a component is about to be destroyed.
+- In each of these phases a lifecycle method is triggered. Some of the key lifecycle methods are :
+  - `componentDidMount()`
+  - `componentDidUpdate()`
+  - `componentWillUnmount()`
+- The below diagram shows when these lifecycle methods are triggered in a React component lifecycle.
 
 <img src="./images/lifecycle.png" width="60%">.
 
