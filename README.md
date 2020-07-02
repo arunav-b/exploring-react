@@ -335,35 +335,39 @@
   );
   ```
 
-- Please note here, the `timerTick()` is an arrow function because it uses the `this` context from the `this` of `componentDidMount()`, as arrow functions use lexical scoping. Alternatively, the timerTick() function can be bound to the Component using the `bind()` method before calling the `setInterval()` method or preferrably inside the `constructor`.
-
-  ```
-    componentDidMount() {
-        this.timerTick = this.timerTick.bind(this);
-        setInterval(this.timerTick, 1000);
-    }
-  ```
-
-  Or,
-
-  ```
-    constructor() {
-        super();
-        this.state = {
-            count: 0
-        };
-        this.timerTick = this.timerTick.bind(this);
-    }
-
-  ```
+  > **Note** :
+  >
+  > - The `timerTick()` is an arrow function because it uses the `this` context from the `this` of `componentDidMount()`. This is because arrow functions use lexical scoping. Hence arrow function looks for the context of `this` in its calling function as `this` is undefined in timerTick().
+  >
+  > - Alternatively, the timerTick() function can be bound to the Component using the `bind()` method before calling the `setInterval()` method or preferrably inside the `constructor`.
+  >
+  >   ```
+  >     componentDidMount() {
+  >         this.timerTick = this.timerTick.bind(this);
+  >         setInterval(this.timerTick, 1000);
+  >     }
+  >   ```
+  >
+  >   Or,
+  >
+  >   ```
+  >     constructor() {
+  >         super();
+  >         this.state = {
+  >             count: 0
+  >         };
+  >         this.timerTick = this.timerTick.bind(this);
+  >     }
+  >
+  >   ```
 
 <br/>
 
-> ### **Props vs State** -
+> ### **Props vs State**
 >
-> `props` and `state` are both **plain JavaScript objects**. While both hold information that influences the output of render, they are different in one important way: `props` get passed to the component (similar to function parameters) whereas `state` is managed within the component (similar to variables declared within a function).
+> - `props` and `state` are both **plain JavaScript objects**. While both hold information that influences the output of render, they are different in one important way: `props` get passed to the component (similar to function parameters) whereas `state` is managed within the component (similar to variables declared within a function).
 >
-> [Additional Reference](https://github.com/uberVU/react-guide/blob/master/props-vs-state.md)
+> - [Additional Reference](https://github.com/uberVU/react-guide/blob/master/props-vs-state.md)
 
 <br/>
 
@@ -383,19 +387,23 @@
 
 <br/>
 
-## 12. Forms:
+## 12. Using the `create-react-app`:
 
 <br/>
 
-## 13. Lifting the State up:
+## 13. Forms:
 
 <br/>
 
-## 14. Stateless Functional Components:
+## 14. Lifting the State up:
 
 <br/>
 
-## 15. Try Implementing -
+## 15. Stateless Functional Components:
+
+<br/>
+
+## 16. Try Implementing -
 
 - Pagination
 - Searching
@@ -405,7 +413,7 @@
 
 <br/>
 
-## 16. React Router
+## 17. React Router
 
 - Switch & Link
 - Route Props
@@ -416,13 +424,13 @@
 
 <br/>
 
-## 17. Calling Backend Services
+## 18. Calling Backend Services
 
 - Using `axios`
 
 <br/>
 
-## 18. Some Advanced Concepts
+## 19. Some Advanced Concepts
 
 - Context
 - Higher Order Components
@@ -433,7 +441,7 @@
 
 <br/>
 
-## 19. React Hooks
+## 20. React Hooks
 
 - useState
 - useEffect
