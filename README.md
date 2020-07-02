@@ -363,11 +363,11 @@
 
 <br/>
 
-> ### **Props vs State**
->
-> - `props` and `state` are both **plain JavaScript objects**. While both hold information that influences the output of render, they are different in one important way: `props` get passed to the component (similar to function parameters) whereas `state` is managed within the component (similar to variables declared within a function).
->
-> - [Additional Reference](https://github.com/uberVU/react-guide/blob/master/props-vs-state.md)
+- ### **Props vs State**
+
+  - `props` and `state` are both **plain JavaScript objects**. While both hold information that influences the output of render, they are different in one important way: `props` get passed to the component (similar to function parameters) whereas `state` is managed within the component (similar to variables declared within a function).
+
+  - [Additional Reference](https://github.com/uberVU/react-guide/blob/master/props-vs-state.md)
 
 <br/>
 
