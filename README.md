@@ -66,9 +66,9 @@
 ### 2B. Passing `props` to a `Component`
 
 - One thing React does is that it reduces the redundancy of rendering similarly styled elements by abstracting the same type of elements in Components.
-- Different values can be passed to the same `Component` using Properties (`props`) to render different values or styles.
-- Using the `this.props.propertyName`, the React `Component` can accept `props` as a JSX expression enclosed in {}. React evaluates the expression inside {} as JavaScript and anything outside it as XML. Hence the name JSX (JavaScript + XML).
-- The `render()` method in React Component outputs the JSX. Let's take a look at how all of it works -
+- Different values can be passed to the same `Component` using Properties (`props`) to render the same component differently.
+- Using the `this.props.propertyName`, the React `Component` can accept `props` as a JSX expression enclosed in `{}`. React evaluates the expression inside `{}` as JavaScript code and anything outside it as XML. Hence the name **JSX** (JavaScript + XML). We will be re-visiting JSX in details shortly.
+- The `render()` method in React Component outputs the JSX. Let's take a look at an example -
 
   ```
     ...
@@ -93,7 +93,8 @@
 
 ### 2C. Passing `children` to a `Component`
 
-- A React Component can accept any data passed via children using `this.props.children`
+- A React Component can accept any data or element passed via children using `this.props.children`.
+- Any data or element passed between the opening <> and closing </> tags of a Component is referred to as `children` of that Component.
 
   ```
     ...
@@ -229,7 +230,7 @@
 
 ## 5. Transferring Props using ES6 Spread (...) operator
 
-- Using the ES6 Spread Operator multiple properties can be passed between components
+- Using the ES6 Spread Operator, multiple properties can be passed between components
 
   ```
     ...
@@ -299,8 +300,8 @@
   - `componentWillUnmount()`
 - The below diagram shows when these lifecycle methods are triggered in a React component lifecycle.
 
-<img src="./images/lifecycle.png" width="100%">
-  
+  <img src="./images/lifecycle.png" width="100%">
+
 <br/>
 
 ## 7. Dealing with State:
@@ -372,46 +373,88 @@
 - ### **Props vs State**
 
   - `props` and `state` are both **plain JavaScript objects**. While both hold information that influences the output of render, they are different in one important way: `props` get passed to the component (similar to function parameters) whereas `state` is managed within the component (similar to variables declared within a function).
+  - `state` is internal to the component and is visible to that particular component only, whereas `props` can be passed between components.
+  - `state` can be updated, but `props` is read-only.
 
-  - [Additional Reference](https://github.com/uberVU/react-guide/blob/master/props-vs-state.md)
+* [Additional Reference](https://github.com/uberVU/react-guide/blob/master/props-vs-state.md)
 
 <br/>
 
-## 8. Rendering Lists:
+## 8. Rendering Multiple Components or Lists:
+
+- We can build collections of elements and include them in JSX using curly braces `{}`.
+- Usually we would render lists inside a component.
+- Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity. Key must be unique among its siblings.
 
 <br/>
 
 ## 9. Conditional Rendering:
 
-<br/>
-
-## 10. Accessing DOM elements in React:
-
-- Accessing DOM elements
+- In React, we can create distinct components that encapsulate behavior you need. Then, we can render only some of them, depending on the state of our application.
 
 <br/>
 
-## 11. Events in React:
+## 10. Events in React:
+
+- Handling events with React elements is very similar to handling events on DOM elements except that -
+  - Event names in React are camelCased
+  - Event handler in React should be a function and not a string
+- Event to event handler binding works on JSX elements, but not on components. When dealing with components, specify the event handler as a prop and the actual event will be handled by the parent which is a JSX element.
+- Some rules to be followed when handling events :
+  - The component that owns a piece of the state, should be the one modifying it.
+  - Raise the event from the Component that is impacted, but handle the event which is maintaining the state of that Component.
 
 <br/>
 
-## 12. Using the `create-react-app`:
+## 11. Controlled Components:
+
+- Controlled Components doesn't have its own local `state`.
+- Receives all the data from the `props`.
+- Raises event when data needs to be changed.
+- It is controlled by its parent.
+
+  <img src="./images/controlled-component.png" width="50%">
 
 <br/>
 
-## 13. Forms:
+## 12. Lifting the State up:
+
+- When we want to pass a state from one Component (say C1) to another(say C2), which is not in a parent-child relationship in a React Component Tree, we can lift the state up to the common parent component (say P). Now the parent component P can pass the state from C1 to the child component C2.
 
 <br/>
 
-## 14. Lifting the State up:
+## 13. Stateless Functional Components:
+
+- When a React Component does not maintain a state of its own, instead of defining the component as a class, we can define it as a Function.
+- A stateless functional component just returns a React element.
+- When referring to `props` within a stateless functional component we cannot use `this`. Instead React will pass the `props` as an argument to the function.
 
 <br/>
 
-## 15. Stateless Functional Components:
+## 14. Accessing DOM elements in React:
+
+- `ref`s provide a way to access DOM nodes or React elements created in the render method.
+- Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
+
+  > **Note**:
+  >
+  > Avoid using refs for anything that can be done declaratively. However, there are a few good use cases for refs:
+  >
+  > - Managing focus, text selection, or media playback.
+  > - Triggering imperative animations.
+  > - Integrating with third-party DOM libraries.
 
 <br/>
 
-## 16. Try Implementing -
+## 15. Using the `create-react-app`:
+
+<br/>
+
+## 16. Forms:
+
+<br/>
+
+## 17. Try Implementing -
 
 - Pagination
 - Searching
@@ -443,9 +486,7 @@
 - Context
 - Higher Order Components
 - Render Props
-- Refs
 - Error Boundaries
-- Portals
 
 <br/>
 
