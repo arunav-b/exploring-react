@@ -381,6 +381,8 @@
 
 ## 10. Accessing DOM elements in React:
 
+- Accessing DOM elements
+
 <br/>
 
 ## 11. Events in React:
