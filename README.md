@@ -485,12 +485,12 @@
 
 ## 11. Lifting the State up:
 
+Some **rules** to be followed when handling events :
+
+- The component that owns a piece of the state, should be the one modifying it.
+- Raise the event from the Component that is impacted, but handle the event which is maintaining the state of that Component.
+
 ### 11.A. Controlled Components
-
-- Some **rules** to be followed when handling events :
-
-  - The component that owns a piece of the state, should be the one modifying it.
-  - Raise the event from the Component that is impacted, but handle the event which is maintaining the state of that Component.
 
 - Controlled Components doesn't have its own local `state`. It is controlled by its parent.
 - It receives all the data from the `props`.
