@@ -1,6 +1,6 @@
 # Learning React.js
 
-> This README is curated by extracting the key concepts of React and providing a brief explanation with some simple examples. The code for each of these examples is also available under the 0-learning-react directory of this repo. At the end of this page there is a list of projects which are also part of this repo.
+> This document provides some key concepts of React with brief explanation and simple examples. The code for each of these examples is also available under the 0-learning-react directory of this repo. Most of the examples used in the initial sections of this repo is built using plain html. In the later part, we will explore how to build production grade single page application using React. At the end of this document there is a list of projects which are also part of this repo.
 
 <br/>
 
