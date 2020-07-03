@@ -661,7 +661,28 @@ Some **rules** to be followed when handling events :
 > 5. **to-do-app** : A basic To-Do application
 
 <br/>
-<br/>
+
+## Some useful third-party react libraries
+
+- **[lodash](https://lodash.com/)**: A useful library to make your code modular and performant when working with arrays, numbers, objects, strings, etc.
+
+  ```
+    npm i --save lodash
+  ```
+
+- **[Joi](https://hapi.dev/module/joi/)**: joi lets you describe your data using a simple, intuitive, and readable language. It allows you to describe your data for both input and output validation, as part of a hapi HTTP server or standalone.
+
+  ```
+    npm install @hapi/joi
+  ```
+
+- **[FlipMove](https://www.npmjs.com/package/react-flip-move)** : For CSS Animations for adding/removing items
+
+  ```
+    npm i -S react-flip-move
+  ```
+
+  <br/>
 
 # References
 
