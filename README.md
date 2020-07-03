@@ -1,13 +1,6 @@
-# Exploring ReactJS
+# Learning React.js
 
-> This README is split as -
->
-> 1. Learning React
-> 2. Building projects
-
-<br/>
-
-# Learning React
+> This README is curated by extracting the key concepts of React and providing a brief explanation with some simple examples. The code for each of these examples is also available under the 0-learning-react directory of this repo. At the end of this page there is a list of projects which are also part of this repo.
 
 <br/>
 
