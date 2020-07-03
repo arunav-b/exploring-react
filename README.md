@@ -563,6 +563,10 @@
   > - Triggering imperative animations.
   > - Integrating with third-party DOM libraries.
 
+- Additional Reading
+  - [Refs](https://reactjs.org/docs/refs-and-the-dom.html)
+  - [Portals](https://reactjs.org/docs/portals.html)
+
 <br/>
 
 ## 14. Using the `create-react-app`:
@@ -624,10 +628,9 @@
 
 ## 19. Some Advanced Concepts
 
-- Context
-- Higher Order Components
-- Render Props
-- Error Boundaries
+- [Context](https://reactjs.org/docs/context.html)
+- [Higher Order Components](https://reactjs.org/docs/higher-order-components.html)
+- [Render Props](https://reactjs.org/docs/render-props.html)
 
 <br/>
 
@@ -642,6 +645,7 @@
 - useCallback
 - Custom Hooks
 - Checkout this [youtube playlist](https://www.youtube.com/playlist?list=PLC3y8-rFHvwisvxhZ135pogtX7_Oe3Q3A)
+- [Documentation](https://reactjs.org/docs/hooks-intro.html)
 
 <br/>
 <br/>
