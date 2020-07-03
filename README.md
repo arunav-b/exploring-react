@@ -283,7 +283,8 @@
 > 4. Can't use reserved JavaScript keywords
 > 5. Comments should be defined in {} in JSX expressions -> /_ Comments will be written here _/
 > 6. HTML elements should be lower-case and React components should be upper-case
-> 7. Your JSX Can Be Anywhere
+> 7. JSX Can Be Anywhere in the Component
+> 8. JSX expressions can be nested as well
 
 <br/>
 
@@ -342,7 +343,7 @@
   );
   ```
 
-  > **Note** :
+  > <a name="stateNote"></a> **Note** :
   >
   > - The `timerTick()` is an arrow function because it uses the `this` context from the `this` of `componentDidMount()`. This is because arrow functions use lexical scoping. Hence arrow function looks for the context of `this` in its calling function as `this` is undefined in timerTick().
   >
@@ -386,23 +387,97 @@
 - Usually we would render lists inside a component.
 - Keys help React identify which items have changed, are added, or are removed. Keys should be given to the elements inside the array to give the elements a stable identity. Key must be unique among its siblings.
 
+  ```
+    class Tagger extends React.Component {
+        state = {
+            tags: ["tag1", "tag2", "tag3"],
+        };
+        render() {
+            return (
+                <div>
+                    <ul>
+                        {this.state.tags.map((tag) => (<li key={tag}>{tag}</li>))}
+                    </ul>
+                </div>
+            );
+        }
+    }
+    ReactDOM.render(<Tagger />, document.querySelector("#container"));
+  ```
+
 <br/>
 
 ## 9. Conditional Rendering:
 
 - In React, we can create distinct components that encapsulate behavior you need. Then, we can render only some of them, depending on the state of our application.
+- Extending the example from rendering lists -
+
+  ```
+    class Tagger extends React.Component {
+        state = {
+            tags: ["tag1", "tag2", "tag3"],
+        };
+        renderTags() {
+            if (this.state.tags.length == 0)
+                return <p>There are no tags !</p>;
+            return (
+                <ul>
+                    {this.state.tags.map((tag) => (<li key={tag}>{tag}</li>))}
+                </ul>
+            );
+        }
+        render() {
+            return <div>{this.renderTags()}</div>;
+        }
+    }
+  ```
 
 <br/>
 
 ## 10. Events in React:
 
 - Handling events with React elements is very similar to handling events on DOM elements except that -
+
   - Event names in React are camelCased
   - Event handler in React should be a function and not a string
-- Event to event handler binding works on JSX elements, but not on components. When dealing with components, specify the event handler as a prop and the actual event will be handled by the parent which is a JSX element.
-- Some rules to be followed when handling events :
+
+- Some **rules** to be followed when handling events :
+
   - The component that owns a piece of the state, should be the one modifying it.
   - Raise the event from the Component that is impacted, but handle the event which is maintaining the state of that Component.
+
+- In the below example, `onClick` event is triggered whenever the `button` '+' is pressed. The event generated is handled by the eventHandler `handleIncrement()` which is an arrow function. As discussed [earlier](#stateNote), arrow functions will use lexical scoping to resolve `this`.
+
+  ```
+    class Counter extends React.Component {
+        state = {
+            count: 0,
+        };
+        handleIncrement = () => {
+            this.setState({ count: this.state.count + 1 });
+        };
+        render() {
+            return (
+                <div>
+                <span>{this.state.count}</span>
+                <button onClick={this.handleIncrement}>+</button>
+                </div>
+            );
+        }
+    }
+    ReactDOM.render(<Counter />, document.querySelector("#container"));
+  ```
+
+  > **Note** :
+  >
+  > - To prevent default behavior of an event, the `preventDefault()` method needs to be called explicitly in the event handler.
+
+- Event to event handler binding works on JSX elements, but not on components. When dealing with components, specify the event handler as a prop and the actual event will be handled by the parent which is a JSX element.
+
+* Additional Reading:
+
+  - [Handling Events](https://reactjs.org/docs/handling-events.html)
+  - [Synthetic Event](https://reactjs.org/docs/events.html)
 
 <br/>
 
