@@ -14,8 +14,11 @@
         state = {
           count: 0,
         };
-        handleIncrement = () => {
-          this.setState({ count: this.state.count + 1 });
+        handleIncrement = (e) => {
+          let count = this.state.count;
+          if (e.shiftKey) count = count + 10;
+          else count = count + 1;
+          this.setState({ count });
         };
         render() {
           return (

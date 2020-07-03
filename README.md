@@ -44,7 +44,7 @@
 
 ## 2. Components
 
-### 2A. Building the first `Component`
+### 2.A. Building the first `Component`
 
 - **Component** : React `Component`s are basically JavaScript classes that takes in inputs, i.e. properties (props) and returns a React element, that defines how a particular section in the UI will look like. In the below example we see how a `Component` is built -
 
@@ -63,7 +63,7 @@
     ...
   ```
 
-### 2B. Passing `props` to a `Component`
+### 2.B. Passing `props` to a `Component`
 
 - One thing React does is that it reduces the redundancy of rendering similarly styled elements by abstracting the same type of elements in Components.
 - Different values can be passed to the same `Component` using Properties (`props`) to render the same component differently.
@@ -91,7 +91,7 @@
     ...
   ```
 
-### 2C. Passing `children` to a `Component`
+### 2.C. Passing `children` to a `Component`
 
 - A React Component can accept any data or element passed via children using `this.props.children`.
 - Any data or element passed between the opening <> and closing </> tags of a Component is referred to as `children` of that Component.
@@ -345,9 +345,9 @@
 
   > <a name="stateNote"></a> **Note** :
   >
-  > - The `timerTick()` is an arrow function because it uses the `this` context from the `this` of `componentDidMount()`. This is because arrow functions use lexical scoping. Hence arrow function looks for the context of `this` in its calling function as `this` is undefined in timerTick().
+  > - The `timerTick()` is an arrow function because it uses the `this` context from the `this` of `componentDidMount()`. This is because arrow functions use lexical scoping. Hence arrow function looks for the context of `this` in its calling function as `this` is undefined in `timerTick()`.
   >
-  > - Alternatively, the timerTick() function can be bound to the Component using the `bind()` method before calling the `setInterval()` method or preferrably inside the `constructor`.
+  > - Alternatively, the `timerTick()` function can be bound to the Component using the `bind()` method before calling the `setInterval()` method or preferrably inside the `constructor`.
   >
   >   ```
   >     componentDidMount() {
@@ -441,11 +441,6 @@
   - Event names in React are camelCased
   - Event handler in React should be a function and not a string
 
-- Some **rules** to be followed when handling events :
-
-  - The component that owns a piece of the state, should be the one modifying it.
-  - Raise the event from the Component that is impacted, but handle the event which is maintaining the state of that Component.
-
 - In the below example, `onClick` event is triggered whenever the `button` '+' is pressed. The event generated is handled by the eventHandler `handleIncrement()` which is an arrow function. As discussed [earlier](#stateNote), arrow functions will use lexical scoping to resolve `this`.
 
   ```
@@ -468,47 +463,103 @@
     ReactDOM.render(<Counter />, document.querySelector("#container"));
   ```
 
+- In the above example, the `onClick` event is not a DOM event but rather a React-specific event type known as SyntheticEvent. These events have a bunch of properties that are specific to an event type.
+
+- Here we are going to use one of the properties (`shiftKey`) of the event. Extending from the previous example, we are going to update the counter value by 10 when both SHIFT key and mouse are pressed together. For normal clicks we'll just increment by 1.
+
+  ```
+    handleIncrement = (e) => {
+        let count = this.state.count;
+        if (e.shiftKey) count = count + 10;
+        else count = count + 1;
+        this.setState({ count });
+    };
+  ```
+
   > **Note** :
   >
-  > - To prevent default behavior of an event, the `preventDefault()` method needs to be called explicitly in the event handler.
+  > - To prevent default behavior of an event, the `event.preventDefault()` method needs to be called explicitly in the event handler.
+  > - On the similar lines, `event.stopPropagation()` method needs to be called explicitly to stop event propagation.
+  > - Don't refer to traditional DOM event documentation when using Synthetic events and their properties.
+  > - Event to event handler binding works only on DOM elements, and does not work on components. We cannot define event handlers on React Components. When dealing with components, specify the event handler inside `props` and the actual event will be handled by the parent or grandparent whichever is a DOM element.
 
-- Event to event handler binding works on JSX elements, but not on components. When dealing with components, specify the event handler as a prop and the actual event will be handled by the parent which is a JSX element.
-
-* Additional Reading:
+- **Additional Reading**:
 
   - [Handling Events](https://reactjs.org/docs/handling-events.html)
   - [Synthetic Event](https://reactjs.org/docs/events.html)
 
 <br/>
 
-## 11. Controlled Components:
+## 11. Lifting the State up:
 
-- Controlled Components doesn't have its own local `state`.
-- Receives all the data from the `props`.
-- Raises event when data needs to be changed.
-- It is controlled by its parent.
+### 11.A. Controlled Components
+
+- Some **rules** to be followed when handling events :
+
+  - The component that owns a piece of the state, should be the one modifying it.
+  - Raise the event from the Component that is impacted, but handle the event which is maintaining the state of that Component.
+
+- Controlled Components doesn't have its own local `state`. It is controlled by its parent.
+- It receives all the data from the `props`.
+- It can raise event when data needs to be changed, but the handling of the event will be done inside the parent.
 
   <img src="./images/controlled-component.png" width="50%">
 
+### 11.B. Lifting the State up
+
+- In React, sharing state is accomplished by moving it up to the closest common ancestor of the components that need it. This is called “lifting state up”.
+
+- Suppose, we want to pass a state from one Component (say C1) to another(say C2), which is not in a parent-child relationship in a React Component Tree, we can lift the state up to the common parent component (say P). Now the parent component P can pass the state from C1 to the child component C2.
+
 <br/>
 
-## 12. Lifting the State up:
-
-- When we want to pass a state from one Component (say C1) to another(say C2), which is not in a parent-child relationship in a React Component Tree, we can lift the state up to the common parent component (say P). Now the parent component P can pass the state from C1 to the child component C2.
-
-<br/>
-
-## 13. Stateless Functional Components:
+## 12. Stateless Functional Components:
 
 - When a React Component does not maintain a state of its own, instead of defining the component as a class, we can define it as a Function.
 - A stateless functional component just returns a React element.
 - When referring to `props` within a stateless functional component we cannot use `this`. Instead React will pass the `props` as an argument to the function.
+- In the below example, we are refactoring the code from Complex Components using Stateless Functional Components.
+
+  ```
+    const Square = ({ color }) => {
+        const squareStyle = {
+            height: 150,
+            backgroundColor: color,
+        };
+        return <div style={squareStyle}><br /></div>;
+    };
+    const Label = (props) => {
+        const labelStyle = {
+            fontFamily: "sans-serif",
+            fontWeight: "bold",
+            ...
+        };
+        return <div><p style={labelStyle}>{props.color}</p></div>;
+    };
+    const Card = ({ color }) => {
+        var cardStyle = {
+            height: 200,
+            width: 150,
+            ...
+        };
+        return (
+            <div style={cardStyle}>
+                <Square color={color} />
+                <Label color={color} />
+            </div>
+        );
+    };
+    ReactDOM.render(
+        <div><Card color="#FF6663" /></div>,
+        document.querySelector("#container")
+    );
+  ```
 
 <br/>
 
-## 14. Accessing DOM elements in React:
+## 13. Accessing DOM elements in React:
 
-- `ref`s provide a way to access DOM nodes or React elements created in the render method.
+- `ref`s provide a way to access DOM nodes or React elements created in the `render()` method.
 - Portals provide a first-class way to render children into a DOM node that exists outside the DOM hierarchy of the parent component.
 
   > **Note**:
@@ -521,15 +572,32 @@
 
 <br/>
 
-## 15. Using the `create-react-app`:
+## 14. Using the `create-react-app`:
+
+- Create React App is a comfortable environment for learning React, and is the best way to start building a new single-page application in React.
+- It sets up your development environment so that you can use the latest JavaScript features, provides a nice developer experience, and optimizes your app for production. You’ll need to have Node >= 8.10 and npm >= 5.6 on your machine. To create a project, run:
+
+  ```
+    npx create-react-app my-app
+    cd my-app
+    npm start
+  ```
+
+- Under the hood, it uses **Babel** and **Webpack**, but we don’t need to know anything about them for building React apps.
+- When we are ready to deploy to production, running `npm run build` will create an optimized build of our app in the build folder.
+
+- [Additional Reading](https://create-react-app.dev/)
 
 <br/>
 
-## 16. Forms:
+## 15. Forms:
+
+- HTML form elements work a little bit differently from other DOM elements in React, because form elements naturally keep some internal state.
+- [Additional Reading](https://reactjs.org/docs/forms.html)
 
 <br/>
 
-## 17. Try Implementing -
+## 16. Try Implementing -
 
 - Pagination
 - Searching
@@ -596,3 +664,7 @@
 - [React JS Documentation](https://reactjs.org/docs/getting-started.html)
 - [React for Beginners](https://www.kirupa.com/react/index.htm)
 - [Mastering React with Mosh](https://codewithmosh.com/p/mastering-react)
+
+```
+
+```
