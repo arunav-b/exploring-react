@@ -670,11 +670,21 @@ Some **rules** to be followed when handling events :
     npm i --save lodash
   ```
 
-- **[Joi](https://hapi.dev/module/joi/)**: joi lets you describe your data using a simple, intuitive, and readable language. It allows you to describe your data for both input and output validation, as part of a hapi HTTP server or standalone.
+- **[joi](https://hapi.dev/module/joi/)**: joi lets you describe your data using a simple, intuitive, and readable language. It allows you to describe your data for both input and output validation, as part of a hapi HTTP server or standalone.
 
   ```
     npm install @hapi/joi
   ```
+
+- **[Formik](https://jaredpalmer.com/formik/docs/overview)**: Formik is a small library that helps you with the 3 most annoying parts:
+
+  - Getting values in and out of form state
+  - Validation and error messages
+  - Handling form submission
+
+    ```
+        npm install formik --save
+    ```
 
 - **[FlipMove](https://www.npmjs.com/package/react-flip-move)** : For CSS Animations for adding/removing items
 
